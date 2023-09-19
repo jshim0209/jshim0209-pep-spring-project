@@ -58,6 +58,12 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
     <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
     <dependency>
       <groupId>com.h2database</groupId>
