@@ -15,5 +15,5 @@ public interface MessageService {
 
     int updateMessage(int messageId, String messageText);
 
-    // List<Message> getAllMessagesByAccountId(int accountId);
+    List<Message> getAllMessagesByAccountId(int accountId);
 }

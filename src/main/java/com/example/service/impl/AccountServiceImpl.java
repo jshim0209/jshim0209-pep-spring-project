@@ -31,11 +31,11 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-    // public void validateUserExists(String username) throws AccountAlreadyExistException {
-    //     if (accountRepository.findByUsername(username).isPresent()) {
-    //         throw new AccountAlreadyExistException("Username Taken!");
-    //     }
-    // }
+    public void validateUserExists(String username) {
+        if (accountRepository.findByUsername(username).isPresent()) {
+            throw new AccountAlreadyExistException("Username Taken!");
+        }
+    }
 
     @Override
     public List<Account> getAllAccounts() {
@@ -46,7 +46,7 @@ public class AccountServiceImpl implements AccountService {
     public Account registerAccount(Account account) {
         validateUsername(account.getUsername());
         validatePassword(account.getPassword());
-        // validateUserExists(account.getUsername());
+        validateUserExists(account.getUsername());
         Account accountCreated = accountRepository.saveAndFlush(account);
         return accountCreated;
     }

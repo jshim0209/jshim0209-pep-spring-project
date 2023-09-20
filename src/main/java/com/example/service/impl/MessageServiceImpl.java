@@ -7,11 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Message;
 import com.example.exception.InvalidInputException;
-import com.example.exception.NotFoundException;
 import com.example.repository.AccountRepository;
 import com.example.repository.MessageRepository;
 import com.example.service.MessageService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
     private final AccountRepository accountRepository;
-    private final ObjectMapper objectMapper;
 
     public void validateMessageInput(String message_text) {
         if (message_text.isBlank() || message_text.length() >= 255) {
@@ -28,8 +25,8 @@ public class MessageServiceImpl implements MessageService {
         }
     }
 
-    public void validateOwner(int account_id) {
-        if (accountRepository.findById(account_id).isEmpty()) {
+    public void validateOwner(int accountId) {
+        if (accountRepository.findById(accountId).isEmpty()) {
             throw new InvalidInputException("User doesn't exist!");
         }
     }
@@ -40,21 +37,21 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Message getMessageById(int messageId) throws NotFoundException {
+    public Message getMessageById(int messageId) {
         Optional<Message> optionalMessage = messageRepository.findById(messageId);
         Message message;
         if (optionalMessage.isPresent()) {
             message = optionalMessage.get();
         } else {
-            throw new NotFoundException();
+            return null;
         }
         return message;       
     }
 
-    // @Override
-    // public List<Message> getAllMessagesByAccountId(int accountId) {
-    //     return messageRepository.findMessagesByPosted_by(accountId);
-    // }
+    @Override
+    public List<Message> getAllMessagesByAccountId(int accountId) {
+        return messageRepository.findAllByPostedBy(accountId);
+    }
 
     @Override
     public Message createMessage(Message message) {
@@ -70,7 +67,7 @@ public class MessageServiceImpl implements MessageService {
         if (optionalMessage.isPresent()) {
             messageRepository.delete(optionalMessage.get());
         } else {
-            throw new NotFoundException();
+            return 0;
         }
         return 1;
     }
@@ -86,8 +83,5 @@ public class MessageServiceImpl implements MessageService {
         messageToBeUpdated.setMessage_text(messageText);
         messageRepository.saveAndFlush(messageToBeUpdated);
         return 1;        
-    }
-
-    
-    
+    }    
 }

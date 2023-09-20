@@ -1,6 +1,6 @@
 package com.example.exception;
 
-public class AccountAlreadyExistException extends Exception {
+public class AccountAlreadyExistException extends RuntimeException {
     public AccountAlreadyExistException() {
         super();
     }
