@@ -22,7 +22,7 @@ public class AccountServiceImpl implements AccountService {
         if (username.trim().isBlank()) {
             throw new IllegalArgumentException("Username input is invalid!");
         }
-        
+
     }
 
     public void validatePassword(String password) {
@@ -59,5 +59,5 @@ public class AccountServiceImpl implements AccountService {
         }
         return optionalAccount.get();
     }
-    
+
 }

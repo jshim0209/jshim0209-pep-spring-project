@@ -45,7 +45,7 @@ public class MessageServiceImpl implements MessageService {
         } else {
             return null;
         }
-        return message;       
+        return message;
     }
 
     @Override
@@ -82,6 +82,6 @@ public class MessageServiceImpl implements MessageService {
         Message messageToBeUpdated = optionalMessage.get();
         messageToBeUpdated.setMessage_text(messageText);
         messageRepository.saveAndFlush(messageToBeUpdated);
-        return 1;        
-    }    
+        return 1;
+    }
 }

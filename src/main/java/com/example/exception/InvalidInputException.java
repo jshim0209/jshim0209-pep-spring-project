@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 public class InvalidInputException extends RuntimeException {
     private String message;
-    
+
 }

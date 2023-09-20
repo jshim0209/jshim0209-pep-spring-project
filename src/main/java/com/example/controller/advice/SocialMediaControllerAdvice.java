@@ -12,7 +12,7 @@ import com.example.exception.InvalidCredentialsException;
 import com.example.exception.InvalidInputException;
 import com.example.exception.NotFoundException;
 
-@ControllerAdvice(basePackages = {"com.example.controller"})
+@ControllerAdvice(basePackages = { "com.example.controller" })
 @ResponseBody
 public class SocialMediaControllerAdvice {
 
@@ -39,5 +39,5 @@ public class SocialMediaControllerAdvice {
     public ErrorDto handleNotFoundException(NotFoundException notFoundException) {
         return new ErrorDto("");
     }
-    
+
 }
